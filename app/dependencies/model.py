@@ -7,9 +7,8 @@ def load_model() -> Language:
     Try to load a real NER model; fall back to a blank English pipeline with a
     tiny EntityRuler so the demo still works out-of-the-box.
     """
-    return spacy.load("en_core_web_lg")
     try:
-        return spacy.load("en_core_web_sm")
+        return spacy.load("en_core_web_lg")
     except Exception:
         nlp = spacy.blank("en")
         ruler = nlp.add_pipe("entity_ruler")
