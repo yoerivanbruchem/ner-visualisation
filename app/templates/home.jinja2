@@ -1,0 +1,73 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+
+
+<div class="container-fluid p-4">
+
+    <div class="row text-center mt-4">
+        <div class="col-1"></div>
+        <div class="col-7">
+            <form id="ner-form">
+                <div class="form-group">
+                    <textarea class="form-control input-text-area" style="min-height: 250px;" id="text" name="text"
+                        rows="3"
+                        placeholder="Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say that they were perfectly normal, thank you very much. They were the last people you'd expect to be involved in anything strange or mysterious, because they just didn't hold with such nonsense. Mr. Dursley was the director of a firm called Grunnings, which made drills. He was a big, beefy man with hardly any neck, although he did have a very large mustache. Mrs. Dursley was thin and blonde and had nearly twice the usual amount of neck, which came in very useful as she spent so much of her time craning over garden fences, spying on the neighbors. The Dursleys had a small son called Dudley and in their opinion there was no finer boy anywhere. "></textarea>
+                </div>
+                <div class="actions" style="margin-top: 12px;">
+                    <button class="btn" type="submit">Analyze with SpaCy</button>
+                    <button class="btn btn-secondary" type="button" id="clear-added">Clear user-added entities</button>
+                </div>
+            </form>
+
+            <div id="annotations" class="card mt-4 p-3">
+                <div id="result" class="result" tabindex="0" aria-label="NER result area"></div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div id="detail" class="card detail p-3">
+                <div class="muted">Click an entity to inspect & use it.</div>
+            </div>
+
+            <div class="card mt-3 p-3">
+                <span><b>Queue</b></span>
+                <div id="queue" class="list"></div>
+            </div>
+
+            <div class="card mt-3 p-3">
+                <span><b>Select new entity</b></span>
+                <div class="pt-3">
+                    <label for="label">Add selection as entity</label>
+                    <select id="label">
+                        <option value="PERSON">PERSON</option>
+                        <option value="ORG">ORG</option>
+                        <option value="GPE">GPE</option>
+                        <option value="LOC">LOC</option>
+                        <option value="DATE">DATE</option>
+                        <option value="MONEY">MONEY</option>
+                        <option value="PRODUCT">PRODUCT</option>
+                        <option value="EVENT">EVENT</option>
+                        <option value="NORP">NORP</option>
+                        <option value="CARDINAL">CARDINAL</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="custom">Custom label (optional)</label>
+                    <input id="custom" type="text" placeholder="e.g., CASE_ID" />
+                </div>
+                <div class="actions" style="margin-top: 10px;">
+                    <button class="btn secondary" type="button" id="add-selection">Add selected text</button>
+                </div>
+                <p class="muted" style="margin-top: 6px;">
+                    Tip: Select text in the result panel on the left and click “Add selected text”.
+                    Your additions re-render together with spaCy’s entities.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{{ url_for('.static', filename='js/app.js') }}"></script>
+
+
+    {% endblock %}
